@@ -53,24 +53,17 @@
 
 ## 3. Interaction & Score Mapping Design
 
-연주자의 피지컬 제스처(Acoustic Input)와 디지털 시스템(Max/MSP) 간의 스코어 매핑 메커니즘은 다음과 같습니다.
+연주자의 피지컬 제스처(Acoustic Input)와 디지털 시스템(Max/MSP) 간의 대구조(A-B-C-D) 및 Section C 내 세부 소구조(a-b-c-d) 매핑 메커니즘은 다음과 같습니다.
 
-| Section | Score Notation (Acoustic Gesture) | Active DSP Module | Parameter Mapping Strategy |
-| :--- | :--- | :--- | :--- |
-| **Intro** | Tap the drum using hand & finger, Circle scratching | **Tape On / Click On** Base | 초기 타격 인벨로프 추출 및 기본 오디오 루프 동기화 |
-| **Section A** | Put a tambourine on the bass drum, Medium mallet | **Vocoder + Delay** | 탬버린 징글(Jingles)의 고주파수 성분을 보코더 필터 Q값과 연동하여 금속성 타격음 증폭 |
-| **Section B** | Snare drum mallet, Complex rhythmic structures | **Teeth Filter** | 타격 속도(accel./rit.)에 따른 컴 필터의 지연 시간 비선형 매핑 |
-| **Section C** | Dynamic Mallet Interlocking | **Teeth + Delay** | 피드백 게인 조절을 통한 음향적 에너지의 점진적 고조 |
-| **Section D** | Put a string of beads on the bass drum, Drum stick | **Vocoder Filter** | 비즈(Beads)의 불규칙한 미세 마찰 신호를 노이즈 임계값(`noise threshold`)과 실시간 대조하여 펄스 신호 트리거 |
-
----
-
-## 4. Future Research & Alignment with MALer Lab
-본 프로젝트는 Max/MSP 환경에서 결정론적(Deterministic) 규칙 기반 알고리즘과 전통적인 DSP 필터를 활용하여 실시간 인터랙션을 성공적으로 구현했습니다. 
-
-향후 **MALer Lab** 연구 과정에서는 이를 다음과 같이 고도화하고자 합니다.
-1. **딥러닝 기반 실시간 오디오 피처 추출:** 하드코딩된 규칙이나 단순 인벨로프 추적을 넘어, 실시간 오디오-악보 정렬(Audio-to-Score Alignment) 및 연주 제스처의 오디오 특징량(Timbre, Onset, Dynamics) 연구를 심화하고 싶습니다.
-2. **멀티모달 표현 학습 적용:** 타악기의 물리적 제스처 데이터와 오디오 신호 간의 관계를 멀티모달(Multimodal) 딥러닝 모델로 학습시켜, 한층 더 정교하고 유기적인 인공지능 기반 실시간 인터랙티브 음악 시스템 아키텍처를 연구하고자 합니다.
+| Major Section | Sub Section | Score Notation (Acoustic Gesture) | Active DSP Module | Parameter Mapping Strategy |
+| :--- | :--- | :--- | :--- | :--- |
+| **Section A** | - | Tap the drum using hand & finger, Circle scratching | **Tape On / Click On** Base | 초기 타격 인벨로프 추출 및 기본 오디오 루프 동기화 |
+| **Section B** | - | Put a tambourine on the bass drum, Medium mallet | **Vocoder + Delay** | 탬버린 징글(Jingles)의 고주파 성분을 보코더 필터 Q값과 연동하여 금속성 타격음 증폭 |
+| **Section C** | **c-a** | Snare drum mallet, Complex rhythmic structures | **Teeth Filter (Comb)** | 타격 속도(accel./rit.)에 따른 컴 필터의 지연 시간(Delay Time) 비선형 매핑 |
+| | **c-b** | Dynamic Mallet Interlocking | **Teeth + Feedback** | 피드백 게인 조절을 통한 음향적 에너지 및 공진성의 점진적 고조 |
+| | **c-c** | Micro-frictional gestures on drum head | **Teeth + Vocoder Crossfade**| 마찰 신호의 주파수 천이에 따른 두 필터 간의 실시간 크로스페이드 |
+| | **c-d** | Put a string of beads on the bass drum, Drum stick | **Vocoder Filter (Pulse)** | 비즈(Beads)의 불규칙한 미세 마찰 신호를 노이즈 임계값(`noise threshold`)과 대조하여 고밀도 펄스 트리거 |
+| **Section D** | - | Maximum Dynamic Mallet Striking & Fade-out | **Spatialization Decay** | 잔향 및 5채널 공간 확산 매트릭스의 극대화를 통한 음향적 잔상 구현 |
 
 ---
 
