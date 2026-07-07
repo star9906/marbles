@@ -1,8 +1,8 @@
 # Marbles: Interactive Live Electronics System for Acoustic Bass Drum
 
-> **Author:** 김동휘 (B.M. in Classical Composition & Computer Music)  
+> **Author:** 김동휘 (B.M. in Classical Composition)  
 > **Release Date:** 2025/12  
-> **Structure:** 4 Major Parts (A-B-C-D), Total 121 Measures  
+> **Structure:** 4 Major Parts (A-B-C-D), Total 121 Measures, 7'56" 
 > **Environment:** Max/MSP 8.x, Tape & Live Electronics Hybrid System  
 
 ---
